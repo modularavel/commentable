@@ -62,3 +62,9 @@ Edit `config/comments.php` to customize:
 ## License
 
 MIT
+
+## Test
+
+```bash
+composer test
+```
