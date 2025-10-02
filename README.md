@@ -5,7 +5,7 @@ A Laravel Blade Livewire package for threaded comments with nested replies.
 ## Installation
 
 ```bash
-composer require laravel-comments/threads
+composer require modularavel/commentable
 ```
 
 ## Publish Configuration & Assets
