@@ -48,7 +48,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Allow users to reply to replies.
-    | Set to false to only allow one level of nesting.
+    | Set too false to only allow one level of nesting.
     |
     */
     'allow_nested_replies' => env('COMMENTS_ALLOW_NESTED_REPLIES', true),
