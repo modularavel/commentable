@@ -8,7 +8,7 @@ A Laravel Blade Livewire package for threaded comments with nested replies.
 
 ![Comment Form](screenshot/02.png)
 
-![Nested Replies](screenshot/03.png)
+![Nested Replies](screenshot/04.png)
 
 ![Threaded Comments with Nested Replies and Real-time Updates with Livewire Threads](screenshot/04.png)
 
