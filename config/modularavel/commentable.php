@@ -9,7 +9,7 @@ return [
     | The user model that will be used for comments.
     |
     */
-    'user_model' => env('COMMENTS_USER_MODEL', 'App\\Models\\User'),
+    'user_model' => env('MODULARAVEL_COMMENTABLE_USER_MODEL', 'App\\Models\\User'),
 
     /*
     |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ return [
     | Set to false if you want to manually moderate comments.
     |
     */
-    'auto_approve' => env('COMMENTS_AUTO_APPROVE', true),
+    'auto_approve' => env('MODULARAVEL_COMMENTABLE_AUTO_APPROVE', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,7 +30,7 @@ return [
     | Number of comments to display per page.
     |
     */
-    'per_page' => env('COMMENTS_PER_PAGE', 10),
+    'per_page' => env('MODULARAVEL_COMMENTABLE_PER_PAGE', 10),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
     | Maximum character length for a comment.
     |
     */
-    'max_length' => env('COMMENTS_MAX_LENGTH', 1000),
+    'max_length' => env('MODULARAVEL_COMMENTABLE_MAX_LENGTH', 1000),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     | Set too false to only allow one level of nesting.
     |
     */
-    'allow_nested_replies' => env('COMMENTS_ALLOW_NESTED_REPLIES', true),
+    'allow_nested_replies' => env('MODULARAVEL_COMMENTABLE_ALLOW_NESTED_REPLIES', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ return [
     | Date format for displaying comment timestamps.
     |
     */
-    'date_format' => env('COMMENTS_DATE_FORMAT', 'M d, Y'),
+    'date_format' => env('MODULARAVEL_COMMENTABLE_DATE_FORMAT', 'M d, Y'),
 
     /*
     |--------------------------------------------------------------------------
@@ -71,5 +71,5 @@ return [
     | Allow guests to comment without logging in.
     |
     */
-    'allow_guest_comments' => env('COMMENTS_ALLOW_GUEST_COMMENTS', false),
+    'allow_guest_comments' => env('MODULARAVEL_COMMENTABLE_ALLOW_GUEST_COMMENTS', false),
 ];
