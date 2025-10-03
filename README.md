@@ -18,12 +18,33 @@ A Laravel Blade Livewire package for threaded comments with nested replies.
 composer require modularavel/commentable
 ```
 
-## Publish Configuration & Assets
+## Publish Migrations
 
 ```bash
-php artisan vendor:publish --tag=comments-config
-php artisan vendor:publish --tag=comments-migrations
-php artisan vendor:publish --tag=comments-views
+php artisan vendor:publish --tag=commentable-migrations
+```
+
+## Publish Configuration
+
+```bash
+php artisan vendor:publish --tag=commentable-config
+```
+
+## Publish Assets
+
+```bash
+php artisan vendor:publish --tag=commentable-assets
+```
+## Publish Languages
+
+```bash
+php artisan vendor:publish --tag=commentable-lang
+```
+
+## Publish Blade Views
+
+```bash
+php artisan vendor:publish --tag=commentable-views
 ```
 
 ## Run Migrations
@@ -43,17 +64,17 @@ php artisan migrate
 ### Make Your Model Commentable
 
 ```php
-use LaravelComments\Threads\Traits\Commentable;
+use Modularavel\Commentable\Traits\HasModularavelCommentable;
 
 class Post extends Model
 {
-    use Commentable;
+    use HasModularavelCommentable;
 }
 ```
 
 ## Configuration
 
-Edit `config/comments.php` to customize:
+Edit `config/modularavel/commentable.php` to customize:
 - User model
 - Pagination settings
 - Moderation options

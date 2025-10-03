@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modularavel\Commentable\Models\CommentReaction;
+use Illuminate\Support\Carbon;
 
 /**
  * Comment Model
@@ -23,9 +23,9 @@ use Modularavel\Commentable\Models\CommentReaction;
  * @property int|null $parent_id
  * @property string $body
  * @property bool $is_approved
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
  */
 class Comment extends Model
 {

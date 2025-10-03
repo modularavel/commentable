@@ -4,7 +4,6 @@ namespace Modularavel\Commentable\Livewire;
 
 use Illuminate\View\View;
 use Modularavel\Commentable\Models\Comment;
-use Modularavel\Commentable\Models\CommentReaction;
 use Livewire\Component;
 
 /**
