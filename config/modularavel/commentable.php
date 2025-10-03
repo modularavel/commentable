@@ -72,4 +72,13 @@ return [
     |
     */
     'allow_guest_comments' => env('MODULARAVEL_COMMENTABLE_ALLOW_GUEST_COMMENTS', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Available Emojis
+    |-
+    | List of available emojis for use in comments.
+    |
+    */
+    'available_emojis' => env('MODULARAVEL_COMMENTABLE_AVAILABLE_EMOJIS', []),
 ];
