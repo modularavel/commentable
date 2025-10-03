@@ -40,7 +40,7 @@ return [
     | Maximum character length for a comment.
     |
     */
-    'max_length' => env('MODULARAVEL_COMMENTABLE_MAX_LENGTH', 1000),
+    'max_length' => env('MODULARAVEL_COMMENTABLE_MAX_LENGTH', 300),
 
     /*
     |--------------------------------------------------------------------------
