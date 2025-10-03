@@ -60,7 +60,7 @@ class TestCase extends Orchestra
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
-            'foreign_key_constraints' => true,
+            'foreign_key_constraints' => true, // To support SQLite foreign key constraints
         ]);
 
         config()->set('auth.providers.users.model', TestUser::class);
