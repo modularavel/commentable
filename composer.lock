@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b51a352e72c6227c4aa703b2c6103ca2",
+    "content-hash": "793b38c13a0242e43dda89186455be01",
     "packages": [
         {
             "name": "brick/math",
@@ -1329,16 +1329,16 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "3832547db6e0e2f8bb03d4093857b378c66eceed"
+                "reference": "038ce42edee619599a1debb7e81d7b3759492819"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/3832547db6e0e2f8bb03d4093857b378c66eceed",
-                "reference": "3832547db6e0e2f8bb03d4093857b378c66eceed",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/038ce42edee619599a1debb7e81d7b3759492819",
+                "reference": "038ce42edee619599a1debb7e81d7b3759492819",
                 "shasum": ""
             },
             "require": {
@@ -1386,7 +1386,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2025-09-22T17:29:40+00:00"
+            "time": "2025-10-09T13:42:30+00:00"
         },
         {
             "name": "league/commonmark",
@@ -6956,21 +6956,21 @@
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v9.16.3",
+            "version": "v9.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "4ea3b276f706c900e3fccfa1db7742829ee9d5af"
+                "reference": "a5b4d56a40536fde50a72e20ce43abaa76f8de2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/4ea3b276f706c900e3fccfa1db7742829ee9d5af",
-                "reference": "4ea3b276f706c900e3fccfa1db7742829ee9d5af",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/a5b4d56a40536fde50a72e20ce43abaa76f8de2f",
+                "reference": "a5b4d56a40536fde50a72e20ce43abaa76f8de2f",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
-                "orchestra/sidekick": "~1.1.14|^1.2.10",
+                "orchestra/sidekick": "~1.1.20|~1.2.17",
                 "php": "^8.2",
                 "symfony/deprecation-contracts": "^2.5|^3.0",
                 "symfony/polyfill-php83": "^1.32"
@@ -7046,7 +7046,7 @@
                 "issues": "https://github.com/orchestral/testbench/issues",
                 "source": "https://github.com/orchestral/testbench-core"
             },
-            "time": "2025-09-03T02:26:35+00:00"
+            "time": "2025-10-14T12:02:37+00:00"
         },
         {
             "name": "orchestra/workbench",
@@ -9506,7 +9506,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1"
+        "php": ">=8.0"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
