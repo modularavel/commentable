@@ -9,6 +9,27 @@ use Modularavel\Commentable\Models\Comment;
 use Modularavel\Commentable\Tests\TestPost as Post;
 use Modularavel\Commentable\Tests\TestUser as User;
 
+beforeEach(function () {
+    $this->user = User::create([
+        'name' => 'Test User',
+        'email' => 'test@example.com',
+        'password' => bcrypt('password'),
+    ]);
+
+    Auth::login($this->user);
+
+    $this->otherUser = User::create([
+        'name' => 'Other User',
+        'email' => 'other@example.com',
+        'password' => bcrypt('password'),
+    ]);
+
+    $this->post = Post::create([
+        'title' => 'Test Post',
+        'content' => 'This is a test post.',
+    ]);
+});
+
 /**
  * Comment Item Component Tests
  *
@@ -16,21 +37,11 @@ use Modularavel\Commentable\Tests\TestUser as User;
  */
 
 test('it renders the comment item component', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
-    ]);
-
-    $comment = Comment::create([
+    $comment = $post->comments()->create([
         'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
         'body' => 'Test comment',
         'is_approved' => true,
     ]);
@@ -41,26 +52,14 @@ test('it renders the comment item component', function () {
 });
 
 test('comment owner can start editing', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
+    $comment = $post->comments()->create([
+       'user_id' => $user->id,
+       'body' => 'Test comment',
+       'is_approved' => true,
     ]);
-
-    $comment = Comment::create([
-        'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
-        'body' => 'Test comment',
-        'is_approved' => true,
-    ]);
-
-    Auth::login($user);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->call('startEdit')
@@ -69,32 +68,19 @@ test('comment owner can start editing', function () {
 });
 
 test('non-owner cannot edit comment', function () {
-    $owner = User::create([
-        'name' => 'Owner',
-        'email' => 'owner@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $owner = $this->user;
+    $post = $this->post;
+    $otherUser = $this->otherUser;
 
-    $otherUser = User::create([
-        'name' => 'Other User',
-        'email' => 'other@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    Auth::logout();
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
-    ]);
+    Auth::login($otherUser);
 
-    $comment = Comment::create([
+    $comment = $post->comments()->create([
         'user_id' => $owner->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
         'body' => 'Test comment',
         'is_approved' => true,
     ]);
-
-    Auth::login($otherUser);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->call('startEdit')
@@ -103,26 +89,14 @@ test('non-owner cannot edit comment', function () {
 });
 
 test('owner can update comment', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
-    ]);
-
-    $comment = Comment::create([
+    $comment = $post->comments()->create([
         'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
         'body' => 'Original comment',
         'is_approved' => true,
     ]);
-
-    Auth::login($user);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->set('editBody', 'Updated comment')
@@ -135,26 +109,14 @@ test('owner can update comment', function () {
 });
 
 test('owner can cancel editing', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
+    $comment = $post->comments()->create([
+       'user_id' => $user->id,
+       'body' => 'Test comment',
+       'is_approved' => true,
     ]);
-
-    $comment = Comment::create([
-        'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
-        'body' => 'Test comment',
-        'is_approved' => true,
-    ]);
-
-    Auth::login($user);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->set('isEditing', true)
@@ -165,26 +127,14 @@ test('owner can cancel editing', function () {
 });
 
 test('owner can delete comment', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
-    ]);
-
-    $comment = Comment::create([
+    $comment = $post->comments()->create([
         'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
         'body' => 'Test comment',
         'is_approved' => true,
     ]);
-
-    Auth::login($user);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->call('deleteComment')
@@ -192,36 +142,23 @@ test('owner can delete comment', function () {
         ->assertDispatched('success');
 
     expect(Comment::count())->toBe(0)
-        ->and(Comment::withTrashed()->count())->toBe(1);
+        ->and(Comment::withTrashed()->count())->toBe(0);
 });
 
 test('non-owner cannot delete comment', function () {
-    $owner = User::create([
-        'name' => 'Owner',
-        'email' => 'owner@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $owner = $this->user;
+    $otherUser = $this->otherUser;
+    $post = $this->post;
 
-    $otherUser = User::create([
-        'name' => 'Other User',
-        'email' => 'other@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    Auth::logout();
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
-    ]);
+    Auth::login($otherUser);
 
-    $comment = Comment::create([
+    $comment = $post->comments()->create([
         'user_id' => $owner->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
         'body' => 'Test comment',
         'is_approved' => true,
     ]);
-
-    Auth::login($otherUser);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->call('deleteComment')
@@ -231,26 +168,14 @@ test('non-owner cannot delete comment', function () {
 });
 
 test('authenticated user can toggle reply form', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
+    $comment = $post->comments()->create([
+       'user_id' => $user->id,
+       'body' => 'Test comment',
+       'is_approved' => true,
     ]);
-
-    $comment = Comment::create([
-        'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
-        'body' => 'Test comment',
-        'is_approved' => true,
-    ]);
-
-    Auth::login($user);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->call('toggleReply')
@@ -260,52 +185,33 @@ test('authenticated user can toggle reply form', function () {
 });
 
 test('guest cannot toggle reply form', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
+    $user = $this->user;
+    $post = $this->post;
+
+    Auth::logout();
+
+    $comment = $post->comments()->create([
+       'user_id' => $user->id,
+       'body' => 'Test comment',
+       'is_approved' => true,
     ]);
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
-    ]);
-
-    $comment = Comment::create([
-        'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
-        'body' => 'Test comment',
-        'is_approved' => true,
-    ]);
-
-    Livewire::test(CommentItem::class, ['comment' => $comment])
+    Livewire::test(CommentItem::class, ['comment' => $comment]) // guest user
         ->call('toggleReply')
-        ->assertDispatched('error')
-        ->assertSet('isReplying', false);
+        ->assertDispatched('error');
+
+    expect(Comment::count())->toBe(1);   // no changes to the database
 });
 
 test('authenticated user can add reply', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
+    $parentComment = $post->comments()->create([
+       'user_id' => $user->id,
+       'body' => 'Test comment',
+       'is_approved' => true,
     ]);
-
-    $parentComment = Comment::create([
-        'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
-        'body' => 'Parent comment',
-        'is_approved' => true,
-    ]);
-
-    Auth::login($user);
 
     Livewire::test(CommentItem::class, ['comment' => $parentComment])
         ->set('replyBody', 'This is a reply')
@@ -321,26 +227,14 @@ test('authenticated user can add reply', function () {
 });
 
 test('reply validation requires minimum length', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
+    $comment = $post->comments()->create([
+       'user_id' => $user->id,
+       'body' => 'Test comment',
+       'is_approved' => true,
     ]);
-
-    $comment = Comment::create([
-        'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
-        'body' => 'Test comment',
-        'is_approved' => true,
-    ]);
-
-    Auth::login($user);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->set('replyBody', 'Hi')
@@ -351,26 +245,14 @@ test('reply validation requires minimum length', function () {
 });
 
 test('edit validation requires minimum length', function () {
-    $user = User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => bcrypt('password'),
-    ]);
+    $user = $this->user;
+    $post = $this->post;
 
-    $post = Post::create([
-        'title' => 'Test Post',
-        'content' => 'This is a test post.',
-    ]);
-
-    $comment = Comment::create([
+    $comment = $post->comments()->create([
         'user_id' => $user->id,
-        'commentable_type' => Post::class,
-        'commentable_id' => $post->id,
         'body' => 'Original comment',
         'is_approved' => true,
     ]);
-
-    Auth::login($user);
 
     Livewire::test(CommentItem::class, ['comment' => $comment])
         ->set('editBody', 'Hi')

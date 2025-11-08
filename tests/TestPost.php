@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modularavel\Commentable\Database\Factories\TestPostFactory;
 use Modularavel\Commentable\Traits\HasModularavelCommentable;
 
+/**
+ * @method static create(string[] $array)
+ */
 class TestPost extends Model
 {
     /** @use HasFactory<TestPostFactory> */

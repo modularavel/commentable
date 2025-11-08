@@ -26,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
+ * @method static create(array $array)
  */
 class Comment extends Model
 {

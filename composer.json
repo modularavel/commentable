@@ -66,18 +66,18 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/pest",
+        "test": "./vendor/bin/pest",
         "post-autoload-dump": [
             "@clear",
             "@prepare"
         ],
-        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "clear": "C:/wamp64/bin/php/php8.3.14/php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "C:/wamp64/bin/php/php8.3.14/php vendor/bin/testbench package:discover --ansi",
+        "build": "C:/wamp64/bin/php/php8.3.14/php vendor/bin/testbench workbench:build --ansi",
         "serve": [
             "Composer\\Config::disableProcessTimeout",
             "@build",
-            "@php vendor/bin/testbench serve --ansi"
+            "C:/wamp64/bin/php/php8.3.14/php vendor/bin/testbench serve --ansi"
         ]
     },
     "minimum-stability": "dev",
